@@ -10,6 +10,22 @@ function App() {
           subheading="Move zones between the left and right lists using the provided buttons to add or remove zones from the permission."
           itemType="Zone"
           parentItemType="Permission"
+          leftItems={[
+            { id: 1, title: "Zone Name 1", ap: 10 },
+            { id: 2, title: "Zone Name 2", ap: 10 },
+            { id: 3, title: "Zone Name 3", ap: 10 },
+            { id: 4, title: "Zone Name 4", ap: 10 },
+          ]}
+          rightItems={[
+            { id: 5, title: "Zone Name 5", ap: 10 },
+            { id: 6, title: "Zone Name 6", ap: 10 },
+            { id: 7, title: "Zone Name 7", ap: 10 },
+            { id: 8, title: "Zone Name 8", ap: 10 },
+            { id: 9, title: "Zone Name 9", ap: 10 },
+          ]}
+          titleField="title"
+          columnNames={["Title", "AP"]}
+          handleSave={() => alert("Save functionality not implemented")}
         />
       </div>
     </>
