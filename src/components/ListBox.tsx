@@ -81,7 +81,7 @@ const ListBox = (props: ListBoxProps) => {
     );
     setLeftItems(
       leftItems
-        .filter((zone) => !selectedLeftItems.includes(zone))
+        .filter((item) => !selectedLeftItems.includes(item))
         .sort((a, b) => a[titleField].localeCompare(b[titleField]))
     );
     setSelectedLeftItems([]);
@@ -95,33 +95,33 @@ const ListBox = (props: ListBoxProps) => {
     );
     setRightItems(
       rightItems
-        .filter((zone) => !selectedRightItems.includes(zone))
+        .filter((item) => !selectedRightItems.includes(item))
         .sort((a, b) => a[titleField].localeCompare(b[titleField]))
     );
     setSelectedRightItems([]);
   };
 
-  const filteredLeftZones = leftItems.filter((zone) =>
-    zone[titleField].toLowerCase().includes(leftSearch.toLowerCase())
+  const filteredLeftItems = leftItems.filter((item) =>
+    item[titleField].toLowerCase().includes(leftSearch.toLowerCase())
   );
 
-  const filteredRightZones = rightItems.filter((zone) =>
-    zone[titleField].toLowerCase().includes(rightSearch.toLowerCase())
+  const filteredRightItem = rightItems.filter((item) =>
+    item[titleField].toLowerCase().includes(rightSearch.toLowerCase())
   );
 
   const handleSelectAllLeft = () => {
-    if (selectedLeftItems.length === filteredLeftZones.length) {
+    if (selectedLeftItems.length === filteredLeftItems.length) {
       setSelectedLeftItems([]);
     } else {
-      setSelectedLeftItems(filteredLeftZones);
+      setSelectedLeftItems(filteredLeftItems);
     }
   };
 
   const handleSelectAllRight = () => {
-    if (selectedRightItems.length === filteredRightZones.length) {
+    if (selectedRightItems.length === filteredRightItem.length) {
       setSelectedRightItems([]);
     } else {
-      setSelectedRightItems(filteredRightZones);
+      setSelectedRightItems(filteredRightItem);
     }
   };
 
@@ -131,7 +131,7 @@ const ListBox = (props: ListBoxProps) => {
       <div className=" font-light text-gray-600">{subheading}</div>
       <div className="list-boxes flex justify-between">
         <div className="list-box w-[45%] ">
-          <div className="text-left py-3">{`${leftItems.length} ${itemType} not in ${parentItemType}`}</div>
+          <div className="text-left py-3 font-bold">{`${leftItems.length} ${itemType} not in ${parentItemType}`}</div>
           <div
             className={`border-[1px] border-gray-300  rounded-md px-3 py-2 ${
               selectedLeftItems.length > 0 ? "bg-[#eff1f5]" : ""
@@ -158,7 +158,7 @@ const ListBox = (props: ListBoxProps) => {
                       <input
                         type="checkbox"
                         checked={
-                          selectedLeftItems.length === filteredLeftZones.length
+                          selectedLeftItems.length === filteredLeftItems.length
                         }
                         onChange={handleSelectAllLeft}
                       />
@@ -171,11 +171,11 @@ const ListBox = (props: ListBoxProps) => {
                   </tr>
                 </thead>
                 <tbody className="text-left">
-                  {filteredLeftZones.map((zone) => (
+                  {filteredLeftItems.map((item) => (
                     <tr
-                      key={zone.id}
+                      key={item.id}
                       className={`border-b-2 border-gray-300 ${
-                        zone.id === selectedLeftItems[0]?.id
+                        item.id === selectedLeftItems[0]?.id
                           ? "bg-[#D2E4F9] "
                           : ""
                       }`}
@@ -184,12 +184,12 @@ const ListBox = (props: ListBoxProps) => {
                         <input
                           type="checkbox"
                           className=""
-                          checked={selectedLeftItems.includes(zone)}
-                          onChange={() => handleSelectLeftItem(zone)}
+                          checked={selectedLeftItems.includes(item)}
+                          onChange={() => handleSelectLeftItem(item)}
                         />
                       </td>
-                      <td className="py-2 px-1 font-bold">{zone.title}</td>
-                      <td className="font-bold">{zone.ap}</td>
+                      <td className="py-2 px-1 font-bold">{item.title}</td>
+                      <td className="font-bold">{item.ap}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -208,8 +208,8 @@ const ListBox = (props: ListBoxProps) => {
             />
           </button>
         </div>
-        <div className="zone-list w-[45%]">
-          <div className="text-left py-3">{`${rightItems.length} ${itemType} not in ${parentItemType}`}</div>
+        <div className="box-list w-[45%]">
+          <div className="text-left py-3 font-bold">{`${rightItems.length} ${itemType} not in ${parentItemType}`}</div>
           <div
             className={`border-[1px] border-gray-300  rounded-md px-3 py-2 ${
               selectedRightItems.length > 0 ? "bg-[#eff1f5]" : ""
@@ -228,7 +228,7 @@ const ListBox = (props: ListBoxProps) => {
                 onChange={(e) => setRightSearch(e.target.value)}
               />
             </div>
-            <div className="zone-list-box border-2  overflow-y-auto  h-[300px] w-full">
+            <div className="list-box-box border-2   overflow-y-auto  h-[300px] w-full">
               <table className="w-full relative ">
                 <thead className="sticky top-0 bg-white border-b-2 border-b-gray-300 text-left">
                   <tr className="font-light">
@@ -236,8 +236,7 @@ const ListBox = (props: ListBoxProps) => {
                       <input
                         type="checkbox"
                         checked={
-                          selectedRightItems.length ===
-                          filteredRightZones.length
+                          selectedRightItems.length === filteredRightItem.length
                         }
                         onChange={handleSelectAllRight}
                       />
@@ -250,18 +249,18 @@ const ListBox = (props: ListBoxProps) => {
                   </tr>
                 </thead>
                 <tbody className="text-left">
-                  {filteredRightZones.map((zone) => (
-                    <tr key={zone.id} className="border-b-2 border-gray-300">
+                  {filteredRightItem.map((item) => (
+                    <tr key={item.id} className="border-b-2 border-gray-300">
                       <td className="text-center px-2">
                         <input
                           type="checkbox"
                           className=""
-                          checked={selectedRightItems.includes(zone)}
-                          onChange={() => handleSelectRightItem(zone)}
+                          checked={selectedRightItems.includes(item)}
+                          onChange={() => handleSelectRightItem(item)}
                         />
                       </td>
-                      <td className="py-2 px-1 font-bold">{zone.title}</td>
-                      <td className="font-bold">{zone.ap}</td>
+                      <td className="py-2 px-1 font-bold">{item.title}</td>
+                      <td className="font-bold">{item.ap}</td>
                     </tr>
                   ))}
                 </tbody>
