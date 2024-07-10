@@ -24,7 +24,18 @@ function App() {
             { id: 9, title: "Zone Name 9", ap: 10 },
           ]}
           titleField="title"
-          columnNames={["Title", "AP"]}
+          columnNames={[
+            {
+              title: "Title",
+              field: "title",
+              type: "text",
+            },
+            {
+              title: "AP",
+              field: "ap",
+              type: "number",
+            },
+          ]}
           handleSave={() => alert("Save functionality not implemented")}
         />
       </div>

@@ -5,7 +5,13 @@ import { FaArrowRight } from "react-icons/fa";
 interface IItem {
   id: number;
   title: string;
-  ap: number;
+  [key: string]: unknown;
+}
+
+interface IColumn {
+  title: string;
+  field: string;
+  type: "text" | "number";
 }
 
 interface ListBoxProps {
@@ -15,7 +21,7 @@ interface ListBoxProps {
   parentItemType: string;
   leftItems: IItem[];
   rightItems: IItem[];
-  columnNames: string[];
+  columnNames: IColumn[];
   titleField: string;
   handleSave: () => void;
 }
@@ -43,7 +49,7 @@ const ListBox = (props: ListBoxProps) => {
     itemType,
     parentItemType,
     columnNames,
-    titleField,
+    titleField = "title",
     leftItems: initialLeftItems,
     rightItems: initialRightItems,
   } = props;
@@ -76,13 +82,13 @@ const ListBox = (props: ListBoxProps) => {
   const moveToRight = () => {
     setRightItems(
       [...rightItems, ...selectedLeftItems].sort((a, b) =>
-        a[titleField].localeCompare(b[titleField])
+        a.title.localeCompare(b.title)
       )
     );
     setLeftItems(
       leftItems
         .filter((item) => !selectedLeftItems.includes(item))
-        .sort((a, b) => a[titleField].localeCompare(b[titleField]))
+        .sort((a, b) => a.title.localeCompare(b.title))
     );
     setSelectedLeftItems([]);
   };
@@ -90,23 +96,23 @@ const ListBox = (props: ListBoxProps) => {
   const moveToLeft = () => {
     setLeftItems(
       [...leftItems, ...selectedRightItems].sort((a, b) =>
-        a[titleField].localeCompare(b[titleField])
+        a.title.localeCompare(b.title)
       )
     );
     setRightItems(
       rightItems
         .filter((item) => !selectedRightItems.includes(item))
-        .sort((a, b) => a[titleField].localeCompare(b[titleField]))
+        .sort((a, b) => a.title.localeCompare(b.title))
     );
     setSelectedRightItems([]);
   };
 
   const filteredLeftItems = leftItems.filter((item) =>
-    item[titleField].toLowerCase().includes(leftSearch.toLowerCase())
+    item.title.toLowerCase().includes(leftSearch.toLowerCase())
   );
 
   const filteredRightItem = rightItems.filter((item) =>
-    item[titleField].toLowerCase().includes(rightSearch.toLowerCase())
+    item.title.toLowerCase().includes(rightSearch.toLowerCase())
   );
 
   const handleSelectAllLeft = () => {
@@ -165,7 +171,7 @@ const ListBox = (props: ListBoxProps) => {
                     </th>
                     {columnNames.map((columnName) => (
                       <th className="cursor-pointer font-light py-2 px-1">
-                        {columnName}
+                        {columnName.title}
                       </th>
                     ))}
                   </tr>
@@ -188,8 +194,11 @@ const ListBox = (props: ListBoxProps) => {
                           onChange={() => handleSelectLeftItem(item)}
                         />
                       </td>
-                      <td className="py-2 px-1 font-bold">{item.title}</td>
-                      <td className="font-bold">{item.ap}</td>
+                      {columnNames.map((columnName) => (
+                        <td className="py-2 px-1 font-bold">
+                          {item[columnName.field] as string | number}
+                        </td>
+                      ))}
                     </tr>
                   ))}
                 </tbody>
@@ -243,7 +252,7 @@ const ListBox = (props: ListBoxProps) => {
                     </th>
                     {columnNames.map((columnName) => (
                       <th className="cursor-pointer font-light py-2 px-1">
-                        {columnName}
+                        {columnName.title}
                       </th>
                     ))}
                   </tr>
@@ -259,8 +268,11 @@ const ListBox = (props: ListBoxProps) => {
                           onChange={() => handleSelectRightItem(item)}
                         />
                       </td>
-                      <td className="py-2 px-1 font-bold">{item.title}</td>
-                      <td className="font-bold">{item.ap}</td>
+                      {columnNames.map((columnName) => (
+                        <td className="py-2 px-1 font-bold">
+                          {item[columnName.field] as string | number}
+                        </td>
+                      ))}
                     </tr>
                   ))}
                 </tbody>
