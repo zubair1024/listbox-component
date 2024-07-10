@@ -22,8 +22,7 @@ interface ListBoxProps {
   leftItems: IItem[];
   rightItems: IItem[];
   columnNames: IColumn[];
-  titleField: string;
-  handleSave: () => void;
+  handleSave: (leftItems: IItem[], rightItems: IItem[]) => void;
 }
 
 /**
@@ -37,8 +36,7 @@ interface ListBoxProps {
  * @param parentItemType - The type of item that the list is being displayed for
  * @param leftItems - The items to be displayed in the left list
  * @param rightItems - The items to be displayed in the right list
- * @param columnNames - The names of the columns to be displayed in the list
- * @param titleField - The name of the field to be displayed as the title of the item
+ * @param columnNames - The names of the columns to be displayed in the list. The field name is the name of the field in the item object, and the type is either "text" or "number"
  * @param handleSave - The function to be called when the save button is clicked
  * @returns
  */
@@ -49,9 +47,9 @@ const ListBox = (props: ListBoxProps) => {
     itemType,
     parentItemType,
     columnNames,
-    titleField = "title",
     leftItems: initialLeftItems,
     rightItems: initialRightItems,
+    handleSave,
   } = props;
 
   const [leftItems, setLeftItems] = useState<IItem[]>(initialLeftItems);
@@ -295,7 +293,7 @@ const ListBox = (props: ListBoxProps) => {
       <div className="flex justify-end">
         <button
           className="bg-[#1D72D4] hover:bg-[#1D72D4] text-white font-light py-2 px-4"
-          onClick={() => alert("Save functionality not implemented")}
+          onClick={() => handleSave(leftItems, rightItems)}
         >
           SAVE
         </button>

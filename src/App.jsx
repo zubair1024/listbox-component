@@ -23,7 +23,6 @@ function App() {
             { id: 8, title: "Zone Name 8", ap: 10 },
             { id: 9, title: "Zone Name 9", ap: 10 },
           ]}
-          titleField="title"
           columnNames={[
             {
               title: "Title",
