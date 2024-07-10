@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .zone-management {
+  padding: 20px;
+}
+
+.zone-lists {
+  display: flex;
+  justify-content: space-between;
+}
+
+.zone-list {
+  width: 45%;
+}
+
+.zone-list-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  height: 300px;
+  overflow-y: auto;
+}
+
+button {
+  margin-top: 10px;
+} */
+
+.zone-management {
+  padding: 20px;
+}
+
+.zone-lists {
+  display: flex;
+  justify-content: space-between;
+}
+
+.zone-list {
+  width: 45%;
+}
+
+.zone-list-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  height: 300px;
+  overflow-y: auto;
+}
+
+button {
+  margin-top: 10px;
+}
