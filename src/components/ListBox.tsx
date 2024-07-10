@@ -199,7 +199,7 @@ const ListBox = (props: ListBoxProps) => {
           <button
             onClick={moveToRight}
             disabled={selectedLeftItems.length === 0}
-            className="mt-3 w-full py-3 shadow-sm border-2 border-[#ca0f04] bg-[#ca0f04] text-white  text-center  font-light flex justify-center items-center rounded-md disabled:bg-gray-300 disabled:text-gray-500 disabled:border-gray-300"
+            className="mt-3 w-full py-3 shadow-sm border-2 border-[#ca0f04] bg-[#ca0f04] text-white  text-center  font-light flex justify-center items-center  disabled:bg-gray-300 disabled:text-gray-500 disabled:border-gray-300"
           >
             <span className="font-bold">{`Remove ${itemType}(s) `}</span>
             <span className="pl-1"> {` from the ${parentItemType}`}</span>
@@ -271,13 +271,13 @@ const ListBox = (props: ListBoxProps) => {
           <button
             onClick={moveToLeft}
             disabled={selectedRightItems.length === 0}
-            className="mt-3 w-full py-3 shadow-sm border-2 border-[#1D72D4] bg-[#1D72D4] text-white  text-center  font-light flex justify-center items-center rounded-md disabled:bg-gray-300 disabled:text-gray-500 disabled:border-gray-300"
+            className="mt-3 w-full py-3 shadow-sm border-2 border-[#1D72D4] bg-[#1D72D4] text-white  text-center  font-light flex justify-center items-center  disabled:bg-gray-300 disabled:text-gray-500 disabled:border-gray-300"
           >
             <FaArrowLeft
               style={{ display: "inline-block", paddingRight: "5px" }}
             />
             <span className="font-bold">{`Add ${itemType}(s) `}</span>
-            <span> {` to the ${parentItemType}`}</span>
+            <span className="pl-1"> {` to the ${parentItemType}`}</span>
           </button>
         </div>
       </div>
