@@ -179,9 +179,7 @@ const ListBox = (props: ListBoxProps) => {
                     <tr
                       key={item.id}
                       className={`border-b-2 border-gray-300 ${
-                        item.id === selectedLeftItems[0]?.id
-                          ? "bg-[#D2E4F9] "
-                          : ""
+                        selectedLeftItems.includes(item) ? "bg-[#D2E4F9] " : ""
                       }`}
                     >
                       <td className="text-center px-2">
@@ -257,7 +255,12 @@ const ListBox = (props: ListBoxProps) => {
                 </thead>
                 <tbody className="text-left">
                   {filteredRightItem.map((item) => (
-                    <tr key={item.id} className="border-b-2 border-gray-300">
+                    <tr
+                      key={item.id}
+                      className={`border-b-2 border-gray-300 ${
+                        selectedRightItems.includes(item) ? "bg-[#D2E4F9] " : ""
+                      }`}
+                    >
                       <td className="text-center px-2">
                         <input
                           type="checkbox"
