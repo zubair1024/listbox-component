@@ -145,7 +145,9 @@ const ListBox = (props: ListBoxProps) => {
             <div className="relative flex items-center justify-center w-full py-1">
               <FaSearch
                 size={12}
-                className="absolute left-3 text-gray-500 pointer-events-none "
+                className={`absolute left-3 text-gray-500 pointer-events-none  ${
+                  leftSearch.length > 0 ? "text-black" : ""
+                } `}
               />
               <input
                 className="w-full rounded-md shadow-inner text-md  pl-8 border-0 p-1 pr-8  border-gray-[#E6E8EA] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-[#599CE8] font-light"
@@ -241,7 +243,9 @@ const ListBox = (props: ListBoxProps) => {
             <div className="relative flex items-center justify-center w-full py-1">
               <FaSearch
                 size={12}
-                className="absolute left-3 text-gray-500 pointer-events-none "
+                className={`absolute left-3 text-gray-500 pointer-events-none  ${
+                  rightSearch.length > 0 ? "text-black" : ""
+                } `}
               />
               <input
                 className="w-full rounded-md shadow-inner text-md  pl-8 border-0 p-1 pr-8  border-gray-[#E6E8EA] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-[#599CE8] font-light"
