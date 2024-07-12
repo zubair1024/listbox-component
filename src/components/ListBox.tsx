@@ -133,9 +133,9 @@ const ListBox = (props: ListBoxProps) => {
     <div className="p-6 space-y-3  text-sm">
       <div className="text-xl font-bold mb-4 text-left">{heading}</div>
       <div className=" font-light text-gray-600">{subheading}</div>
-      <div className="list-boxes flex space-x-5">
-        <div className="list-box w-[45%] ">
-          <div className="text-left py-3 font-bold">{`${leftItems.length} ${itemType} not in ${parentItemType}`}</div>
+      <div className="list-boxes flex justify-center space-x-5">
+        <div className="list-box w-[50%] ">
+          <div className="text-left py-3 font-bold">{`${leftItems.length} ${itemType}  in ${parentItemType}`}</div>
           <div
             className={`border-[1px] border-gray-[#E6E8EA]  rounded-md p-3 ${
               selectedLeftItems.length > 0 ? "bg-[#eff1f5]" : ""
@@ -155,51 +155,60 @@ const ListBox = (props: ListBoxProps) => {
               />
             </div>
             <div className="list-box-box    overflow-y-auto  h-[300px] w-full">
-              <table className="w-full relative  ">
-                <thead className="sticky top-0  text-left">
-                  <tr className="font-light">
-                    <th className="text-center px-2">
-                      <input
-                        type="checkbox"
-                        checked={
-                          filteredLeftItems.length > 0 &&
-                          selectedLeftItems.length === filteredLeftItems.length
-                        }
-                        onChange={handleSelectAllLeft}
-                      />
-                    </th>
-                    {columnNames.map((columnName) => (
-                      <th className="cursor-pointer font-light py-2 px-1">
-                        {columnName.title}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="text-left border-2 border-[#E6E8EA]">
-                  {filteredLeftItems.map((item) => (
-                    <tr
-                      key={item.id}
-                      className={`border-b-2 border-gray-[#E6E8EA] ${
-                        selectedLeftItems.includes(item) ? "bg-[#D2E4F9] " : ""
-                      }`}
-                    >
-                      <td className="text-center px-2">
+              {filteredLeftItems.length > 0 ? (
+                <table className="w-full relative  ">
+                  <thead className="sticky top-0  text-left">
+                    <tr className="font-light">
+                      <th className="text-center px-2">
                         <input
                           type="checkbox"
-                          className=""
-                          checked={selectedLeftItems.includes(item)}
-                          onChange={() => handleSelectLeftItem(item)}
+                          checked={
+                            filteredLeftItems.length > 0 &&
+                            selectedLeftItems.length ===
+                              filteredLeftItems.length
+                          }
+                          onChange={handleSelectAllLeft}
                         />
-                      </td>
+                      </th>
                       {columnNames.map((columnName) => (
-                        <td className="py-2 px-1 font-bold">
-                          {item[columnName.field] as string | number}
-                        </td>
+                        <th className="cursor-pointer font-light py-2 px-1">
+                          {columnName.title}
+                        </th>
                       ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="text-left border-2 border-[#E6E8EA]">
+                    {filteredLeftItems.map((item) => (
+                      <tr
+                        key={item.id}
+                        className={`border-b-2 border-gray-[#E6E8EA] ${
+                          selectedLeftItems.includes(item)
+                            ? "bg-[#D2E4F9] "
+                            : ""
+                        }`}
+                      >
+                        <td className="text-center px-2">
+                          <input
+                            type="checkbox"
+                            className=""
+                            checked={selectedLeftItems.includes(item)}
+                            onChange={() => handleSelectLeftItem(item)}
+                          />
+                        </td>
+                        {columnNames.map((columnName) => (
+                          <td className="py-2 px-1 font-bold">
+                            {item[columnName.field] as string | number}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <div className="text-left font-light p-3">
+                  No items to display
+                </div>
+              )}
             </div>
             <button
               onClick={moveToRight}
@@ -214,7 +223,7 @@ const ListBox = (props: ListBoxProps) => {
             </button>
           </div>
         </div>
-        <div className="box-list w-[45%]">
+        <div className="box-list w-[50%]">
           <div className="text-left py-3 font-bold">{`${rightItems.length} ${itemType} not in ${parentItemType}`}</div>
           <div
             className={`border-[1px] border-gray-[#E6E8EA]  rounded-md p-3 ${
@@ -235,51 +244,60 @@ const ListBox = (props: ListBoxProps) => {
               />
             </div>
             <div className="list-box-box    overflow-y-auto  h-[300px] w-full">
-              <table className="w-full relative  ">
-                <thead className="sticky top-0  text-left">
-                  <tr className="font-light">
-                    <th className="text-center px-2">
-                      <input
-                        type="checkbox"
-                        checked={
-                          filteredRightItem.length > 0 &&
-                          selectedRightItems.length === filteredRightItem.length
-                        }
-                        onChange={handleSelectAllRight}
-                      />
-                    </th>
-                    {columnNames.map((columnName) => (
-                      <th className="cursor-pointer font-light py-2 px-1">
-                        {columnName.title}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="text-left border-2 border-[#E6E8EA]">
-                  {filteredRightItem.map((item) => (
-                    <tr
-                      key={item.id}
-                      className={`border-b-2 border-gray-[#E6E8EA] ${
-                        selectedRightItems.includes(item) ? "bg-[#D2E4F9] " : ""
-                      }`}
-                    >
-                      <td className="text-center px-2">
+              {filteredRightItem.length > 0 ? (
+                <table className="w-full relative  ">
+                  <thead className="sticky top-0  text-left">
+                    <tr className="font-light">
+                      <th className="text-center px-2">
                         <input
                           type="checkbox"
-                          className=""
-                          checked={selectedRightItems.includes(item)}
-                          onChange={() => handleSelectRightItem(item)}
+                          checked={
+                            filteredRightItem.length > 0 &&
+                            selectedRightItems.length ===
+                              filteredRightItem.length
+                          }
+                          onChange={handleSelectAllRight}
                         />
-                      </td>
+                      </th>
                       {columnNames.map((columnName) => (
-                        <td className="py-2 px-1 font-bold">
-                          {item[columnName.field] as string | number}
-                        </td>
+                        <th className="cursor-pointer font-light py-2 px-1">
+                          {columnName.title}
+                        </th>
                       ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="text-left border-2 border-[#E6E8EA]">
+                    {filteredRightItem.map((item) => (
+                      <tr
+                        key={item.id}
+                        className={`border-b-2 border-gray-[#E6E8EA] ${
+                          selectedRightItems.includes(item)
+                            ? "bg-[#D2E4F9] "
+                            : ""
+                        }`}
+                      >
+                        <td className="text-center px-2">
+                          <input
+                            type="checkbox"
+                            className=""
+                            checked={selectedRightItems.includes(item)}
+                            onChange={() => handleSelectRightItem(item)}
+                          />
+                        </td>
+                        {columnNames.map((columnName) => (
+                          <td className="py-2 px-1 font-bold">
+                            {item[columnName.field] as string | number}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <div className="text-left font-light p-3">
+                  No items to display
+                </div>
+              )}
             </div>
             <button
               onClick={moveToLeft}
