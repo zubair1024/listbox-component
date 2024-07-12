@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaArrowLeft, FaSearch } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
+import { IoMdCloseCircle } from "react-icons/io";
 
 interface IItem {
   id: number;
@@ -147,12 +148,19 @@ const ListBox = (props: ListBoxProps) => {
                 className="absolute left-3 text-gray-500 pointer-events-none "
               />
               <input
-                className="w-full rounded-md shadow-inner text-md  pl-8 border-0 p-1 pr-8  border-gray-[#E6E8EA] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 font-light "
+                className="w-full rounded-md shadow-inner text-md  pl-8 border-0 p-1 pr-8  border-gray-[#E6E8EA] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-[#599CE8] font-light"
                 type="text"
                 placeholder={`Search for a ${itemType}`}
                 value={leftSearch}
                 onChange={(e) => setLeftSearch(e.target.value)}
               />
+              <div
+                className={`absolute text- right-3 top-3 cursor-pointer text-[#737ea3] ${
+                  leftSearch.length > 0 ? "" : "hidden"
+                }`}
+              >
+                <IoMdCloseCircle size={12} onClick={() => setLeftSearch("")} />
+              </div>
             </div>
             <div className="list-box-box    overflow-y-auto  h-[300px] w-full">
               {filteredLeftItems.length > 0 ? (
@@ -213,7 +221,7 @@ const ListBox = (props: ListBoxProps) => {
             <button
               onClick={moveToRight}
               disabled={selectedLeftItems.length === 0}
-              className="mt-3 w-full py-3 shadow-sm border-2 border-[#ca0f04] bg-[#ca0f04] text-white  text-center  font-light flex justify-center items-center  disabled:bg-gray-300 disabled:text-gray-500 disabled:border-gray-[#E6E8EA]"
+              className="mt-3 w-full py-3 shadow-sm border-2 border-[#ca0f04] bg-[#ca0f04] text-white  text-center  font-light flex justify-center items-center  disabled:text-[#959AA2]  disabled:bg-transparent  disabled:border-[#E6E8EA]"
             >
               <span className="font-bold">{`Remove ${itemType}(s) `}</span>
               <span className="pl-1"> {` from the ${parentItemType}`}</span>
@@ -236,12 +244,19 @@ const ListBox = (props: ListBoxProps) => {
                 className="absolute left-3 text-gray-500 pointer-events-none "
               />
               <input
-                className="w-full rounded-md shadow-inner text-md  pl-8 border-0 p-1 pr-8  border-gray-[#E6E8EA] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 font-light "
+                className="w-full rounded-md shadow-inner text-md  pl-8 border-0 p-1 pr-8  border-gray-[#E6E8EA] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-[#599CE8] font-light"
                 type="text"
                 placeholder={`Search for a ${itemType}`}
                 value={rightSearch}
                 onChange={(e) => setRightSearch(e.target.value)}
               />
+              <div
+                className={`absolute text- right-3 top-3 cursor-pointer text-[#737ea3] ${
+                  rightSearch.length > 0 ? "" : "hidden"
+                }`}
+              >
+                <IoMdCloseCircle size={12} onClick={() => setRightSearch("")} />
+              </div>
             </div>
             <div className="list-box-box    overflow-y-auto  h-[300px] w-full">
               {filteredRightItem.length > 0 ? (
@@ -302,7 +317,7 @@ const ListBox = (props: ListBoxProps) => {
             <button
               onClick={moveToLeft}
               disabled={selectedRightItems.length === 0}
-              className="mt-3 w-full py-3 shadow-sm border-2 border-[#1D72D4] bg-[#1D72D4] text-white  text-center  font-light flex justify-center items-center  disabled:bg-gray-300 disabled:text-gray-500 disabled:border-gray-[#E6E8EA]"
+              className="mt-3 w-full py-3 shadow-sm border-2 border-[#1D72D4] bg-[#1D72D4] text-white  text-center  font-light flex justify-center items-center disabled:text-[#959AA2]  disabled:bg-transparent  disabled:border-[#E6E8EA]"
             >
               <FaArrowLeft
                 style={{ display: "inline-block", paddingRight: "5px" }}
