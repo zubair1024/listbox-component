@@ -133,11 +133,11 @@ const ListBox = (props: ListBoxProps) => {
     <div className="p-6 space-y-3  text-sm">
       <div className="text-xl font-bold mb-4 text-left">{heading}</div>
       <div className=" font-light text-gray-600">{subheading}</div>
-      <div className="list-boxes flex justify-between">
+      <div className="list-boxes flex space-x-5">
         <div className="list-box w-[45%] ">
           <div className="text-left py-3 font-bold">{`${leftItems.length} ${itemType} not in ${parentItemType}`}</div>
           <div
-            className={`border-[1px] border-gray-300  rounded-md px-3 py-2 ${
+            className={`border-[1px] border-gray-[#E6E8EA]  rounded-md p-3 ${
               selectedLeftItems.length > 0 ? "bg-[#eff1f5]" : ""
             }`}
           >
@@ -147,21 +147,22 @@ const ListBox = (props: ListBoxProps) => {
                 className="absolute left-3 text-gray-500 pointer-events-none "
               />
               <input
-                className="w-full rounded-md shadow-inner text-md  pl-8 border-0 p-1 pr-8  border-gray-300 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 font-light "
+                className="w-full rounded-md shadow-inner text-md  pl-8 border-0 p-1 pr-8  border-gray-[#E6E8EA] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 font-light "
                 type="text"
                 placeholder={`Search for a ${itemType}`}
                 value={leftSearch}
                 onChange={(e) => setLeftSearch(e.target.value)}
               />
             </div>
-            <div className="list-box-box border-2   overflow-y-auto  h-[300px] w-full">
-              <table className="w-full relative ">
-                <thead className="sticky top-0 border-b-2  border-b-gray-300 text-left">
+            <div className="list-box-box    overflow-y-auto  h-[300px] w-full">
+              <table className="w-full relative  ">
+                <thead className="sticky top-0  text-left">
                   <tr className="font-light">
                     <th className="text-center px-2">
                       <input
                         type="checkbox"
                         checked={
+                          filteredLeftItems.length > 0 &&
                           selectedLeftItems.length === filteredLeftItems.length
                         }
                         onChange={handleSelectAllLeft}
@@ -174,11 +175,11 @@ const ListBox = (props: ListBoxProps) => {
                     ))}
                   </tr>
                 </thead>
-                <tbody className="text-left">
+                <tbody className="text-left border-2 border-[#E6E8EA]">
                   {filteredLeftItems.map((item) => (
                     <tr
                       key={item.id}
-                      className={`border-b-2 border-gray-300 ${
+                      className={`border-b-2 border-gray-[#E6E8EA] ${
                         selectedLeftItems.includes(item) ? "bg-[#D2E4F9] " : ""
                       }`}
                     >
@@ -200,23 +201,23 @@ const ListBox = (props: ListBoxProps) => {
                 </tbody>
               </table>
             </div>
+            <button
+              onClick={moveToRight}
+              disabled={selectedLeftItems.length === 0}
+              className="mt-3 w-full py-3 shadow-sm border-2 border-[#ca0f04] bg-[#ca0f04] text-white  text-center  font-light flex justify-center items-center  disabled:bg-gray-300 disabled:text-gray-500 disabled:border-gray-[#E6E8EA]"
+            >
+              <span className="font-bold">{`Remove ${itemType}(s) `}</span>
+              <span className="pl-1"> {` from the ${parentItemType}`}</span>
+              <FaArrowRight
+                style={{ display: "inline-block", paddingLeft: "5px" }}
+              />
+            </button>
           </div>
-          <button
-            onClick={moveToRight}
-            disabled={selectedLeftItems.length === 0}
-            className="mt-3 w-full py-3 shadow-sm border-2 border-[#ca0f04] bg-[#ca0f04] text-white  text-center  font-light flex justify-center items-center  disabled:bg-gray-300 disabled:text-gray-500 disabled:border-gray-300"
-          >
-            <span className="font-bold">{`Remove ${itemType}(s) `}</span>
-            <span className="pl-1"> {` from the ${parentItemType}`}</span>
-            <FaArrowRight
-              style={{ display: "inline-block", paddingLeft: "5px" }}
-            />
-          </button>
         </div>
         <div className="box-list w-[45%]">
           <div className="text-left py-3 font-bold">{`${rightItems.length} ${itemType} not in ${parentItemType}`}</div>
           <div
-            className={`border-[1px] border-gray-300  rounded-md px-3 py-2 ${
+            className={`border-[1px] border-gray-[#E6E8EA]  rounded-md p-3 ${
               selectedRightItems.length > 0 ? "bg-[#eff1f5]" : ""
             }`}
           >
@@ -226,21 +227,22 @@ const ListBox = (props: ListBoxProps) => {
                 className="absolute left-3 text-gray-500 pointer-events-none "
               />
               <input
-                className="w-full rounded-md shadow-inner text-md  pl-8 border-0 p-1 pr-8  border-gray-300 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 font-light "
+                className="w-full rounded-md shadow-inner text-md  pl-8 border-0 p-1 pr-8  border-gray-[#E6E8EA] ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 font-light "
                 type="text"
                 placeholder={`Search for a ${itemType}`}
                 value={rightSearch}
                 onChange={(e) => setRightSearch(e.target.value)}
               />
             </div>
-            <div className="list-box-box border-2   overflow-y-auto  h-[300px] w-full">
-              <table className="w-full relative ">
-                <thead className="sticky top-0 bg-white border-b-2 border-b-gray-300 text-left">
+            <div className="list-box-box    overflow-y-auto  h-[300px] w-full">
+              <table className="w-full relative  ">
+                <thead className="sticky top-0  text-left">
                   <tr className="font-light">
                     <th className="text-center px-2">
                       <input
                         type="checkbox"
                         checked={
+                          filteredRightItem.length > 0 &&
                           selectedRightItems.length === filteredRightItem.length
                         }
                         onChange={handleSelectAllRight}
@@ -253,11 +255,11 @@ const ListBox = (props: ListBoxProps) => {
                     ))}
                   </tr>
                 </thead>
-                <tbody className="text-left">
+                <tbody className="text-left border-2 border-[#E6E8EA]">
                   {filteredRightItem.map((item) => (
                     <tr
                       key={item.id}
-                      className={`border-b-2 border-gray-300 ${
+                      className={`border-b-2 border-gray-[#E6E8EA] ${
                         selectedRightItems.includes(item) ? "bg-[#D2E4F9] " : ""
                       }`}
                     >
@@ -279,18 +281,18 @@ const ListBox = (props: ListBoxProps) => {
                 </tbody>
               </table>
             </div>
+            <button
+              onClick={moveToLeft}
+              disabled={selectedRightItems.length === 0}
+              className="mt-3 w-full py-3 shadow-sm border-2 border-[#1D72D4] bg-[#1D72D4] text-white  text-center  font-light flex justify-center items-center  disabled:bg-gray-300 disabled:text-gray-500 disabled:border-gray-[#E6E8EA]"
+            >
+              <FaArrowLeft
+                style={{ display: "inline-block", paddingRight: "5px" }}
+              />
+              <span className="font-bold">{`Add ${itemType}(s) `}</span>
+              <span className="pl-1"> {` to the ${parentItemType}`}</span>
+            </button>
           </div>
-          <button
-            onClick={moveToLeft}
-            disabled={selectedRightItems.length === 0}
-            className="mt-3 w-full py-3 shadow-sm border-2 border-[#1D72D4] bg-[#1D72D4] text-white  text-center  font-light flex justify-center items-center  disabled:bg-gray-300 disabled:text-gray-500 disabled:border-gray-300"
-          >
-            <FaArrowLeft
-              style={{ display: "inline-block", paddingRight: "5px" }}
-            />
-            <span className="font-bold">{`Add ${itemType}(s) `}</span>
-            <span className="pl-1"> {` to the ${parentItemType}`}</span>
-          </button>
         </div>
       </div>
       <div className="flex justify-end">
